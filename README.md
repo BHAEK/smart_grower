@@ -2,10 +2,8 @@
 ### This repository contains the code for a DIY smart plant grower using a ESP8266
 ---
 ### Index
-[Main features](https://github.com/BHAEK/smart_grower/edit/main/README.md#main-features)
-
-[Components used](https://github.com/BHAEK/smart_grower/edit/main/README.md#components-used)
-
+1. [Main features](https://github.com/BHAEK/smart_grower/edit/main/README.md#main-features)
+2. [Components used](https://github.com/BHAEK/smart_grower/edit/main/README.md#components-used)
 ---
 ### Main features:
 * The system is controlled/monitored using the MQTT protocol
