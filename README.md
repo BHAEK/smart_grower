@@ -4,6 +4,7 @@
 ### Index
 1. [Main features](https://github.com/BHAEK/smart_grower/edit/main/README.md#main-features)
 2. [Components used](https://github.com/BHAEK/smart_grower/edit/main/README.md#components-used)
+3. [Scheme](https://github.com/BHAEK/smart_grower/blob/main/README.md#scheme)
 ---
 ### Main features:
 * The system is controlled/monitored using the MQTT protocol
@@ -25,3 +26,7 @@
 * 1 x transistor
 * X x resistors
 * X x diodes
+---
+### Scheme:
+![Scheme](https://github.com/BHAEK/smart_grower/blob/main/smart_grower_scheme.png?raw=true)
+Scheme realized using [Fritzing software](https://fritzing.org/)
