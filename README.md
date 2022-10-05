@@ -14,7 +14,8 @@
 * It supports three different light levels selected by the user
   * Light intensity is detected using a photoresistor 
   * Light intensity is automatically controlled using "grow full spectrum LEDs"
-* The water level in the tank is monitored by a "soil moisture sensor" 
+* The water level in the tank is monitored by a "soil moisture sensor" used as water-level sensor
+*  
 ---
 ### Components used:
 * 1 x NodeMCU ESP8266
@@ -23,9 +24,9 @@
 * 1 x photoresistor
 * 1 x 5v water pump
 * 1 x 1 channel relay module
-* 1 x transistor
-* X x resistors
-* X x diodes
+* 2 x NPN transistor
+* 3 x 1KΩ resistors
+* 3 x diodes
 ---
 ### Scheme:
 ![Scheme](https://github.com/BHAEK/smart_grower/blob/main/smart-grower_schem.jpg?raw=true)
