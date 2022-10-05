@@ -28,5 +28,5 @@
 * X x diodes
 ---
 ### Scheme:
-![Scheme](https://github.com/BHAEK/smart_grower/blob/main/smart_grower_scheme.png?raw=true)
+![Scheme](https://github.com/BHAEK/smart_grower/blob/main/smart-grower_schem.jpg?raw=true)
 Scheme realized using [Fritzing software](https://fritzing.org/)
