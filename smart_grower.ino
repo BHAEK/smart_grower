@@ -1,7 +1,6 @@
 /////////////////// INCLUDES OF EXTERNAL LIBRARIES /////////////////////
 
 #include <TaskScheduler.h>      // LIBRARY FOR TASKS
-#include <ArduPID.h>            // LIBRARY FOR PID-CONTROL OF GROW LEDS
 #include <ESP8266WiFi.h>        // LIBRARY FOR WIFI MANAGEMENT
 #include <PubSubClient.h>       // LIBRARY FOR MQTT PUBLISHING AND SUBSCRIBING
 
