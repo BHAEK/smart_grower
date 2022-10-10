@@ -26,6 +26,7 @@ From the application you can real-time monitor soil moisture level, light level 
 ### Software used:
 * [TaskScheduler](https://github.com/arkhipenko/TaskScheduler) 
 * [ESP8266WiFi](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WiFi)
+* [PubSubClient](https://github.com/knolleary/pubsubclient/)
 ---
 ### Components used:
 * 1 x NodeMCU ESP8266
