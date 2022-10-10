@@ -6,6 +6,11 @@
 2. [Components used](https://github.com/BHAEK/smart_grower/edit/main/README.md#components-used)
 3. [Scheme](https://github.com/BHAEK/smart_grower/blob/main/README.md#scheme)
 ---
+### Description
+This is a very simple smart growing tool helpful to grow a small plant from the seed. You can control and monitor the entire system from an application or other software that implements a MQTT Client. 
+I personally used IoT OnOff ([MACOS](https://apps.apple.com/us/app/iot-onoff/id1267226555), [iOS](https://apps.apple.com/app/id1267226555)) to control the system.
+From the application you can real-time monitor soil moisture level, light level and water level in the tank. You can also set three different soil moisture levels and three different light level. The system will automatically regulate water and illumination to satisfy the selected level.
+---
 ### Main features:
 * The system is controlled/monitored using the MQTT protocol
 * It supports three different soil moisture levels selected by the user
@@ -17,7 +22,7 @@
 * The water level in the tank is monitored by a "soil moisture sensor" used as water-level sensor
 ---
 ### Software used:
-* [TaskScheduler] (https://github.com/arkhipenko/TaskScheduler) 
+* [TaskScheduler](https://github.com/arkhipenko/TaskScheduler) 
 * [ESP8266WiFi](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WiFi)
 ---
 ### Components used:
