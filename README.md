@@ -15,7 +15,10 @@
   * Light intensity is detected using a photoresistor 
   * Light intensity is automatically controlled using "grow full spectrum LEDs"
 * The water level in the tank is monitored by a "soil moisture sensor" used as water-level sensor
-*  
+---
+### Software used:
+* [TaskScheduler] (https://github.com/arkhipenko/TaskScheduler) 
+* [ESP8266WiFi](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WiFi)
 ---
 ### Components used:
 * 1 x NodeMCU ESP8266
