@@ -7,10 +7,17 @@
 /////////////////// CONSTANTS & PINS //////////////////////////////////
 
 // USER DEFINED CONSTANTS THAT MUST BE CHANGED:
-#define WIFI_SSID "ssid"
-#define WIFI_PSWD "password"
-#define MQTT_SERVER "test.mosquitto.org"
-#define MQTT_TOPIC "bhaek/smart_grower"
+#define WIFI_SSID "your_ssid"
+#define WIFI_PSWD "your_password"
+#define MQTT_SERVER "your_mqtt_server"
+// THESE ARE THE MQTT TOPICS FOR MQTT MESSAGES INBOUND AND OUTBOUND
+#define MQTT_LIGHT_SENSOR "your_topic_ligh_sensor"
+#define MQTT_LIGHT_INTENSITY "your_topic_ligh_intensity_outbound"
+#define MQTT_MOISTURE_SENSOR "your_topic_moisture_sensor"
+#define MQTT_MOISTURE_INTENSITY "your_topic_moisture_intensity_outbound"
+#define MQTT_WATER_SENSOR "your_topic_water_sensor"
+#define MQTT_SET_MOISTURE_INTENSITY "your_topic_moisture_intensity_inbound"
+#define MQTT_SET_LIGHT_INTENSITY "your_topic_light_intensity_inbound"
 // -------------------------
 
 
@@ -33,10 +40,10 @@
 #define MOISTURE_SENSOR 2
 #define WATER_LEVEL_SENSOR 3
 #define LIGHT_CONTROL_SAMPLE_TIME 10                     // IT CONTROLS HOW OFTEN LEDS INTENSITY IS CONTROLLED AND (EVENTUALLY) CHANGED
-#define MQTT_UPDATE_TIME 500                             // HOW OFTEN MQTT MESSAGES ARE SENTS (MILLISECONDS)
+#define MQTT_UPDATE_TIME 1000                             // HOW OFTEN MQTT MESSAGES ARE SENTS (MILLISECONDS)
 #define LIGHT_ERROR_THRESHOLD 2                          // USED AS ERROR MARGIN IN LED REGULATION
 #define LIGHT_LED_INTENSITY_STEP 2                       // USED WHEN IS NEEDED TO INCREASE/DECREASE LEDS INTENSITY
-#define MOISTURE_ERROR_THRESHOLD 100                     // USED AS ERROR MARGIN IN MOISTURE REGULATION
+#define MOISTURE_ERROR_THRESHOLD 50                     // USED AS ERROR MARGIN IN MOISTURE REGULATION
 #define WATERING_TIME 3000                               // HOW LONG WATERING PROCESS TAKES
 #define MOISTURE_CONTROL_SAMPLE_TIME 60000               // IT CONTROLS HOW OFTEN MOISTURE IS CONTROLLED AND (EVENTUALLY) WATERS THE PLANT
 // -------------------------
@@ -51,19 +58,17 @@ enum intensity {zero = 0, one = 1, two = 2};
 
 intensity light_intensity = (intensity)0;
 int light_sensor_value;
-int light_setpoint = 100;
+int light_setpoint = 200;
 int leds_value = 128;// Initially half power
 
 intensity moisture_intensity = (intensity)0;
 int moisture_sensor_value;
-int moisture_setpoint = 900;
+int moisture_setpoint = 300;
 
 // SCHEDULER
 Scheduler runner;                                       
 
-// WIFI
-const char* ssid = WIFI_SSID;                           
-const char* password = WIFI_PSWD;                      
+// WIFI                     
 WiFiClient smart_grower;
 
 // MQTT
@@ -117,10 +122,10 @@ void setup_wifi() {
 #ifdef DEBUG_MODE
   Serial.println();
   Serial.print("Connecting to ");
-  Serial.println(ssid);
+  Serial.println(WIFI_SSID);
 #endif
   WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
+  WiFi.begin(WIFI_SSID, WIFI_PSWD);
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -150,15 +155,15 @@ void mtqq_client_main_loop() {
 
 void send_mtqq_updates() {
   snprintf (msg, MSG_BUFFER_SIZE, "%ld", (int)light_sensor_value);                    // SEND LIGHT SENSOR VALUE
-  client.publish(strcat(MQTT_TOPIC,"/status/light_sensor"), msg);
+  client.publish(MQTT_LIGHT_SENSOR, msg);
   snprintf (msg, MSG_BUFFER_SIZE, "%ld", (int)light_intensity);                       // SEND LIGHT INTENSITY VALUE
-  client.publish(strcat(MQTT_TOPIC,"/status/light_intesnity"), msg);
+  client.publish(MQTT_MOISTURE_INTENSITY, msg);
   snprintf (msg, MSG_BUFFER_SIZE, "%ld", (int)read_sensor(MOISTURE_SENSOR));          // SEND MOISTURE SENSOR VALUE
-  client.publish(strcat(MQTT_TOPIC,"/status/moisture_sensor"), msg);
+  client.publish(MQTT_MOISTURE_SENSOR, msg);
   snprintf (msg, MSG_BUFFER_SIZE, "%ld", (int)moisture_intensity);                    // SEND MOISTURE INTENSITY VALUE
-  client.publish(strcat(MQTT_TOPIC,"/status/moisture_intensity"), msg);
+  client.publish(MQTT_MOISTURE_INTENSITY, msg);
   snprintf (msg, MSG_BUFFER_SIZE, "%ld", (int)read_sensor(WATER_LEVEL_SENSOR));       // SEND WATER LEVEL SENSOR VALUE
-  client.publish(strcat(MQTT_TOPIC,"/status/water_sensor"), msg);
+  client.publish(MQTT_WATER_SENSOR, msg);
 }
 
 void message_received(char* topic, byte* payload, unsigned int length) {
@@ -177,7 +182,7 @@ void message_received(char* topic, byte* payload, unsigned int length) {
 #ifdef DEBUG_MODE
   Serial.println();
 #endif
-  if (strcmp(topic, "bhaek/smart_grower/controls/light_intensity") == 0) {              // SET LIGHT INTENSITY MESSAGE ARRIVED
+  if (strcmp(topic, MQTT_SET_LIGHT_INTENSITY) == 0) {              // SET LIGHT INTENSITY MESSAGE ARRIVED
     if (payload_string.compareTo("0") == 0) {
       set_light_intensity(zero);
     } else if (payload_string.compareTo("1") == 0) {
@@ -185,7 +190,7 @@ void message_received(char* topic, byte* payload, unsigned int length) {
     } else if (payload_string.compareTo("2") == 0) {
       set_light_intensity(two);
     }
-  } else if (strcmp(topic, "bhaek/smart_grower/controls/moisture_intensity") == 0) {    // SET MOISTURE INTENSITY MESSAGE ARRIVED
+  } else if (strcmp(topic, MQTT_SET_MOISTURE_INTENSITY) == 0) {    // SET MOISTURE INTENSITY MESSAGE ARRIVED
     if (payload_string.compareTo("0") == 0) {
       set_moisture_intensity(zero);
     } else if (payload_string.compareTo("1") == 0) {
@@ -262,7 +267,7 @@ void set_light_intensity(intensity i) {                                  // HIGH
 
 void set_moisture_intensity(intensity i) {                                // HIGH VALUE => MORE DRY
   moisture_intensity = i;
-  moisture_setpoint = 900 - (int)moisture_intensity * 300;                // VALUES ARE 900-600-300
+  moisture_setpoint = 300 - (int)moisture_intensity * 125;                // VALUES ARE 300-175-50
 #ifdef DEBUG_MODE
   Serial.println("MOISTURE INTENSITY CHANGED. NOW INTENSITY: " + String((int)moisture_intensity) + " AND SETPOINT: " + String(moisture_setpoint));
 #endif
