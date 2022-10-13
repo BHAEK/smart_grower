@@ -2,10 +2,11 @@
 ### This repository contains the code for a DIY smart plant grower using a ESP8266
 ---
 ### Index
-1. [Main features](https://github.com/BHAEK/smart_grower/edit/main/README.md#main-features)
-2. [Components used](https://github.com/BHAEK/smart_grower/edit/main/README.md#components-used)
-3. [Scheme](https://github.com/BHAEK/smart_grower/blob/main/README.md#scheme)
-4. [My implementatio](https://github.com/BHAEK/smart_grower/blob/main/README.md#my-implementation)
+1. [Description](https://github.com/BHAEK/smart_grower/edit/main/README.md#description)
+2. [Main features](https://github.com/BHAEK/smart_grower/edit/main/README.md#main-features)
+3. [Components used](https://github.com/BHAEK/smart_grower/edit/main/README.md#components-used)
+4. [Scheme](https://github.com/BHAEK/smart_grower/blob/main/README.md#scheme)
+5. [My implementatio](https://github.com/BHAEK/smart_grower/blob/main/README.md#my-implementation)
 ---
 ### Description
 
