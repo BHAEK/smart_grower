@@ -11,7 +11,7 @@
 ### Description
 
 This is a very simple smart growing tool helpful to grow a small plant from the seed. You can control and monitor the entire system from an application or other software that implements a MQTT Client. 
-I personally used IoT OnOff ([MACOS](https://apps.apple.com/us/app/iot-onoff/id1267226555), [iOS](https://apps.apple.com/app/id1267226555)) to control the system.
+I personally used IoT Manager ([iOS](https://apps.apple.com/app/id1267226555)) to control the system.
 From the application you can real-time monitor soil moisture level, light level and water level in the tank. You can also set three different soil moisture levels and three different light level. The system will automatically regulate water and illumination to satisfy the selected level.
 
 ---
