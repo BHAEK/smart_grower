@@ -48,3 +48,5 @@ Scheme realized using [Fritzing software](https://fritzing.org/)
 ### My implementation:
 ![My implementation front](https://github.com/BHAEK/smart_grower/blob/55421489f4856edda74b0fda4854b13f3f6df948/my%20implementation/GENERAL_FRONT.jpg)
 ![My implementation up](https://github.com/BHAEK/smart_grower/blob/55421489f4856edda74b0fda4854b13f3f6df948/my%20implementation/GENERAL_UP.jpg)
+![USB alimentation](https://github.com/BHAEK/smart_grower/blob/55421489f4856edda74b0fda4854b13f3f6df948/my%20implementation/USB_ALIMENTATION.jpg)
+![My implementation screenshot](https://github.com/BHAEK/smart_grower/blob/55421489f4856edda74b0fda4854b13f3f6df948/my%20implementation/APP_SCREENSHOT.jpg)
