@@ -2,15 +2,16 @@
 ### This repository contains the code for a DIY smart plant grower using a ESP8266
 ---
 ### Index
-1. [Main features](https://github.com/BHAEK/smart_grower/edit/main/README.md#main-features)
-2. [Components used](https://github.com/BHAEK/smart_grower/edit/main/README.md#components-used)
-3. [Scheme](https://github.com/BHAEK/smart_grower/blob/main/README.md#scheme)
-4. [My implementatio](https://github.com/BHAEK/smart_grower/blob/main/README.md#my-implementation)
+1. [Description](https://github.com/BHAEK/smart_grower/edit/main/README.md#description)
+2. [Main features](https://github.com/BHAEK/smart_grower/edit/main/README.md#main-features)
+3. [Components used](https://github.com/BHAEK/smart_grower/edit/main/README.md#components-used)
+4. [Scheme](https://github.com/BHAEK/smart_grower/blob/main/README.md#scheme)
+5. [My implementatio](https://github.com/BHAEK/smart_grower/blob/main/README.md#my-implementation)
 ---
 ### Description
 
 This is a very simple smart growing tool helpful to grow a small plant from the seed. You can control and monitor the entire system from an application or other software that implements a MQTT Client. 
-I personally used IoT OnOff ([MACOS](https://apps.apple.com/us/app/iot-onoff/id1267226555), [iOS](https://apps.apple.com/app/id1267226555)) to control the system.
+I personally used EasyMQTT ([iOS](https://apps.apple.com/it/app/easymqtt/id1523099606)) to control the system.
 From the application you can real-time monitor soil moisture level, light level and water level in the tank. You can also set three different soil moisture levels and three different light level. The system will automatically regulate water and illumination to satisfy the selected level.
 
 ---
