@@ -94,11 +94,11 @@ int transofrm_water_value(int);                         // THIS FUNCTION FIXS TH
 
 void setup_wifi();                                      // THIS FUNCTION INITIALIZES THE WIFI CONNECTION
 
-void mtqq_client_main_loop();                           // THESE FUNCTIONS TRY TO CONNECT AND RECONNECT TO THE MQTT SERVER
+void mqtt_client_main_loop();                           // THESE FUNCTIONS TRY TO CONNECT AND RECONNECT TO THE MQTT SERVER
 void reconnect();
   
 void message_received(char*, byte*, unsigned int);      // THIS FUNCTION HANDLES THE MESSAGES RECEIVED FROM THE MQTT SERVER 
-void send_mtqq_updates();                               // THIS FUNCTION, PERIODICALLY CALLED, SENDS MQTT MESSAGES WITH STATUS UPDATES
+void send_mqtt_updates();                               // THIS FUNCTION, PERIODICALLY CALLED, SENDS MQTT MESSAGES WITH STATUS UPDATES
 
 /////////////////// TASKS CREATION ///////////////////////////////////
 
@@ -109,10 +109,10 @@ Task grow_led_control_task(LIGHT_CONTROL_SAMPLE_TIME, TASK_FOREVER, &grow_led_co
 Task water_pump_control_task(MOISTURE_CONTROL_SAMPLE_TIME, TASK_FOREVER, &water_control);
 
 // THIS TASK SENDS MQTT UPDATES
-Task send_mtqq_updates_task(MQTT_UPDATE_TIME, TASK_FOREVER, &send_mtqq_updates);
+Task send_mqtt_updates_task(MQTT_UPDATE_TIME, TASK_FOREVER, &send_mqtt_updates);
 
 // THIS TASK MANAGES MQTT INBOUND
-Task mtqq_client_main_loop_task(0, TASK_FOREVER, mtqq_client_main_loop);
+Task mqtt_client_main_loop_task(0, TASK_FOREVER, mqtt_client_main_loop);
 
 /////////////////// FUNCTIONS ////////////////////////////////////////
 
@@ -143,7 +143,7 @@ void setup_wifi() {
 #endif
 }
 
-void mtqq_client_main_loop() {
+void mqtt_client_main_loop() {
   if (!client.connected()) {
 #ifdef DEBUG_MODE
     Serial.println("I'M NOT CONNECTED TO THE SERVER...");
@@ -153,7 +153,7 @@ void mtqq_client_main_loop() {
   client.loop();
 }
 
-void send_mtqq_updates() {
+void send_mqtt_updates() {
   snprintf (msg, MSG_BUFFER_SIZE, "%ld", (int)light_sensor_value);                    // SEND LIGHT SENSOR VALUE
   client.publish(MQTT_LIGHT_SENSOR, msg);
   snprintf (msg, MSG_BUFFER_SIZE, "%ld", (int)light_intensity);                       // SEND LIGHT INTENSITY VALUE
@@ -379,15 +379,15 @@ void setup() {
 #endif
   runner.addTask(grow_led_control_task);
   runner.addTask(water_pump_control_task);
-  runner.addTask(send_mtqq_updates_task);
-  runner.addTask(mtqq_client_main_loop_task);
+  runner.addTask(send_mqtt_updates_task);
+  runner.addTask(mqtt_client_main_loop_task);
 #ifdef DEBUG_MODE
   Serial.println("TASKS ADDED SUCCESSFULLY");
 #endif
   grow_led_control_task.enable();
   water_pump_control_task.enable();
-  send_mtqq_updates_task.enable();
-  mtqq_client_main_loop_task.enable();
+  send_mqtt_updates_task.enable();
+  mqtt_client_main_loop_task.enable();
 #ifdef DEBUG_MODE
   Serial.println("TASKS ENABLED SUCCESSFULLY");
 #endif
