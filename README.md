@@ -10,23 +10,23 @@
 ---
 ### Description
 
-This is a very simple smart growing tool helpful to grow a small plant from the seed. You can control and monitor the entire system from an application or other software that implements a MQTT Client. 
-I personally used EasyMQTT ([iOS](https://apps.apple.com/it/app/easymqtt/id1523099606)) to control the system.
+This is a very simple smart growing tool helpful to grow a small plant from the seed. You can control and monitor the entire system from an application or other software that implements a MQTT Client.
+I personally used IoT OnOff ([iOS](https://apps.apple.com/it/app/iot-onoff/id1267226555)) to control the system.
 From the application you can real-time monitor soil moisture level, light level and water level in the tank. You can also set three different soil moisture levels and three different light level. The system will automatically regulate water and illumination to satisfy the selected level.
 
 ---
 ### Main features:
 * The system is controlled/monitored using the MQTT protocol
 * It supports three different soil moisture levels selected by the user
-  * Soil moisture is detected using a "soil moisture sensor" 
+  * Soil moisture is detected using a "soil moisture sensor"
   * Soil moisture is automatically controlled using a water pump to irrigate
 * It supports three different light levels selected by the user
-  * Light intensity is detected using a photoresistor 
+  * Light intensity is detected using a photoresistor
   * Light intensity is automatically controlled using "grow full spectrum LEDs"
 * The water level in the tank is monitored by a "soil moisture sensor" used as water-level sensor
 ---
 ### Software used:
-* [TaskScheduler](https://github.com/arkhipenko/TaskScheduler) 
+* [TaskScheduler](https://github.com/arkhipenko/TaskScheduler)
 * [ESP8266WiFi](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WiFi)
 * [PubSubClient](https://github.com/knolleary/pubsubclient/)
 ---
